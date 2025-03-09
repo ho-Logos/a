@@ -362,7 +362,7 @@ then
 
     # window for running linpeas
     tmux new-window -t $SESSION_NAME:8 -n "linpeas"
-    tmux send-keys -t "linpeas" "./do-linpeas.sh"
+    tmux send-keys -t "linpeas" "./do-linpeas.sh" C-m
 fi
 
 # Name session Work
