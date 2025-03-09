@@ -1,0 +1,26 @@
+version: '3'
+
+name: splunk-state
+
+services:
+  splunk:
+    container_name: splunk
+    image: "splunk/splunk:9.1.1"
+    ports:
+      - "8000:8000/tcp"
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_PASSWORD: ${SPLUNK_PASSWD}
+    volumes:
+      - opt_data:/opt
+      - var_tmp_data:/var/tmp
+      - ansible_data:/home/ansible
+    read_only: true
+    restart: unless-stopped
+
+volumes:
+  opt_data:
+  var_tmp_data:
+  ansible_data:
+
+# username admin

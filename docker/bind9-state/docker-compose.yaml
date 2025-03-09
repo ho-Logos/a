@@ -1,0 +1,28 @@
+version: '3'
+
+name: bind9-state
+
+services:
+  bind9:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bind9_image
+    container_name: bind9
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - ./config:/etc/bind
+      - ./cache:/var/cache/bind
+      - ./records:/var/lib/bind
+      - bind_run:/run
+      - bind_tmp:/tmp
+    restart: unless-stopped
+    read_only: true
+
+volumes:
+  bind_run:
+  bind_tmp:
